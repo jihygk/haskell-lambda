@@ -1,12 +1,32 @@
 service: parking
 
+custom:
+  company: servian
+
 provider:
   name: aws
   runtime: haskell
+  region: ap-southeast-2
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - s3:PutObject
+    Resource: 
+      Fn::Join:
+        - ""
+        - - "arn:aws:s3:::"
+          - Ref: CityOfMelbourneOpenDataBucket
+          - "/*"
 
 functions:
-  parking-func:
+  melbourne-parking-sensor:
     handler: parking.parking-exe
+    events: 
+      - schedule: 
+        rate: rate(2 minutes)
+        name: melbourne-parking-sensor-refresh-2mins
+        description: "Schedule to trigger download of City of Melbourne Parking Sensor data https://data.melbourne.vic.gov.au/Transport-Movement/On-street-Parking-Bay-Sensors/vh2v-4nfs"
+        enabled: false
     # Here, mypackage is the Haskell package name and myfunc is the executable
     # name as defined in the Cabal file. The handler field may be prefixed
     # with a path of the form `dir1/.../dirn`, relative to `serverless.yml`,
@@ -16,3 +36,10 @@ functions:
 
 plugins:
   - serverless-haskell
+
+resources:
+  Resources:
+    CityOfMelbourneOpenDataBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.company}-city-of-melbourne-open-data

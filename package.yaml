@@ -1,10 +1,10 @@
 name:                parking
 version:             0.1.0
-github:              "githubuser/parking"
+github:              "jihygk/parking"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2019 Author name here"
+author:              "Jay Kim"
+maintainer:          "jihygk@gmail.com"
+copyright:           "2019 Jay Kim"
 
 extra-source-files:
 - README.md
@@ -20,9 +20,19 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/githubuser/parking#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- serverless-haskell
 - aeson
+- amazonka
+- amazonka-s3
+- base >= 4.7 && < 5
+- bytestring
+- iso8601-time
+- lens
+- lens-aeson
+- serverless-haskell
+- text
+- time
+- wreq
+
 
 library:
   source-dirs: src
