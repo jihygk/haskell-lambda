@@ -22,11 +22,7 @@ functions:
   melbourne-parking-sensor:
     handler: parking.parking-exe
     events: 
-      - schedule: 
-        rate: rate(2 minutes)
-        name: melbourne-parking-sensor-refresh-2mins
-        description: "Schedule to trigger download of City of Melbourne Parking Sensor data https://data.melbourne.vic.gov.au/Transport-Movement/On-street-Parking-Bay-Sensors/vh2v-4nfs"
-        enabled: false
+      - schedule: rate(2 minutes)
     # Here, mypackage is the Haskell package name and myfunc is the executable
     # name as defined in the Cabal file. The handler field may be prefixed
     # with a path of the form `dir1/.../dirn`, relative to `serverless.yml`,
