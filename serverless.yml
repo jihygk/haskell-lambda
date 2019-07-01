@@ -20,7 +20,7 @@ provider:
 
 functions:
   melbourne-parking-sensor:
-    memorySize: 128
+    memorySize: 256
     handler: parking.parking-exe
     events: 
       - schedule: rate(2 minutes)
